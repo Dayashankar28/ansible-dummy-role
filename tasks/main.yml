@@ -1,0 +1,18 @@
+---
+# tasks file for dummy-role
+- name: Install apache httpd
+  ansible.builtin.apt:
+    name: apache2
+    state: present
+
+- name: Copy file with owner and permissions
+  ansible.builtin.copy:
+    src: files/index.html
+    dest: /var/www/html
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Remove useless packages from the cache
+  ansible.builtin.apt:
+    autoclean: yes
